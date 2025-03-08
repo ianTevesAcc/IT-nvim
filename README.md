@@ -19,6 +19,10 @@
 - [ ] Set up MD rendering
 - [ ] Set up floating diagnostics instead of inline
 
+## Broken
+- [ ] Lint is currently broken (Works once then never works again at nvim startup)
+- [ ] floating diagnostics on `Options.lua` currently broken (probably missed something small)
+
 ---
 
 ## Credits
