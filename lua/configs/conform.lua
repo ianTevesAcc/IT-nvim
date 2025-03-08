@@ -1,8 +1,16 @@
+-- conform.lua - Formatting setup
+local conform = require "conform"
+
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
+    go = { "gofmt" },
+    python = { "black" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
+    cs = { "csharpier" },
   },
   format_on_save = {
     timeout_ms = 500,
@@ -30,11 +38,11 @@ end
 local function remove_empty_lines(bufnr)
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
   -- Remove empty lines at start
-  while #lines > 0 and lines[1]:match("^%s*$") do
+  while #lines > 0 and lines[1]:match "^%s*$" do
     table.remove(lines, 1)
   end
   -- Remove empty lines at end
-  while #lines > 0 and lines[#lines]:match("^%s*$") do
+  while #lines > 0 and lines[#lines]:match "^%s*$" do
     table.remove(lines, #lines)
   end
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
@@ -43,7 +51,7 @@ end
 -- Function to fix indentation
 local function fix_indentation(bufnr)
   vim.api.nvim_buf_call(bufnr, function()
-    vim.cmd("normal! gg=G") -- Auto-indent entire file
+    vim.cmd "normal! gg=G" -- Auto-indent entire file
   end)
 end
 

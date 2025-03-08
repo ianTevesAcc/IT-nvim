@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-  theme_toggle = {"tokyodark", "tokyonight"},
+  theme_toggle = { "tokyodark", "tokyonight" },
   theme = "tokyonight",
 
   hl_override = {
@@ -19,8 +19,8 @@ M.nvdash = { load_on_startup = true }
 
 M.ui = {
   tabufline = {
-    lazyload = false
-  }
+    lazyload = false,
+  },
 }
 
 return M
