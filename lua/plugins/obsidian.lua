@@ -26,7 +26,7 @@ return {
         name = "Ubuntu",
         path = "~/",
         overrides = {
-          notes_subdir = "~/1inbox/NOTES.md",
+          notes_subdir = "/5resources/01notes",
         },
       },
     },
