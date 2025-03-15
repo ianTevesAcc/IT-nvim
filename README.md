@@ -12,12 +12,17 @@
 - [x] Set up git remote repo
 - [x] Update README
 - [x] Set up Conform
-- [ ] Set up Debuggers
 - [ ] Set up Linters
 - [ ] Set up Dap
+- [ ] Set up Debuggers
+  - [ ] set up cpp
 - [ ] Set <TAB> as select for CMP instead of <CR>
 - [ ] Set up MD rendering
 - [ ] Set up floating diagnostics instead of inline
+- [ ] Fix LSP
+  - [ ] add vim as global
+  - [ ] fix LSP root
+  - [ ] fix linters (add linter for lua, cpp, etc.)
 
 ## Broken
 - [ ] Lint is currently broken (Works once then never works again at nvim startup)
