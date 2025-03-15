@@ -23,6 +23,9 @@
   - [ ] add vim as global
   - [ ] fix LSP root
   - [ ] fix linters (add linter for lua, cpp, etc.)
+- [ ] Add plugins:
+  - [ ] leap nvim
+  - [ ]
 
 ## Broken
 - [ ] Lint is currently broken (Works once then never works again at nvim startup)
