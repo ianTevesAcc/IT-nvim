@@ -22,6 +22,7 @@
 ## Broken
 - [ ] Lint is currently broken (Works once then never works again at nvim startup)
 - [ ] floating diagnostics on `Options.lua` currently broken (probably missed something small)
+- [ ] LSP config broken - Getting LSP errors for wrong root and vim not being seen as a global config.
 
 ---
 
