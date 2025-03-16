@@ -2,9 +2,8 @@ return {
   "mfussenegger/nvim-dap",
   dependencies = {
     "rcarriga/nvim-dap-ui",
+    "nvim-neotest/nvim-nio",
     "theHamsta/nvim-dap-virtual-text",
-    "nvim-telescope/telescope-dap.nvim",
-    "williamboman/mason.nvim", -- Mason for installing debuggers
     "jay-babu/mason-nvim-dap.nvim", -- Mason integration for DAP
   },
 
@@ -61,8 +60,9 @@ return {
     end
 
     -- Debugger Signs
-    vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "Error", linehl = "", numhl = "" })
-    vim.fn.sign_define("DapStopped", { text = "➡️", texthl = "Warning", linehl = "debugPC", numhl = "" })
+    vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#ff0000", bg = "None" })
+    vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+    vim.fn.sign_define("DapStopped", { text = "⚪", texthl = "Warning", linehl = "debugPC", numhl = "" })
 
     -- Keybindings for Debugging
     local map = vim.keymap.set
@@ -70,10 +70,11 @@ return {
     map("n", "<F10>", dap.step_over, { desc = "Step Over" })
     map("n", "<F11>", dap.step_into, { desc = "Step Into" })
     map("n", "<F12>", dap.step_out, { desc = "Step Out" })
-    map("n", "<Leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-    map("n", "<Leader>dB", function()
+    map("n", "<Leader>dt", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+    map("n", "<Leader>dT", function()
       dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
     end, { desc = "Set Conditional Breakpoint" })
+    map("n", "<Leader>dc", dap.clear_breakpoints, { desc = "Clear All Breakpoints" })
     map("n", "<Leader>dr", dap.repl.open, { desc = "Open Debug Console" })
     map("n", "<Leader>du", dapui.toggle, { desc = "Toggle DAP UI" })
   end,
