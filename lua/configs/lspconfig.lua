@@ -13,6 +13,18 @@ local root_pattern = lspconfig.util.root_pattern(
   ".git"
 )
 
+-- Default fallback root directory
+local fallback_root = vim.fn.expand "~/.config/nvim/"
+
+-- Function to determine root directory
+local function get_root_dir(fname)
+  local root = root_pattern(fname)
+  if root == nil or root == vim.loop.os_homedir() then
+    return fallback_root
+  end
+  return root
+end
+
 -- Configure LSP diagnostics (floating windows instead of inline)
 vim.diagnostic.config {
   virtual_text = false, -- Disables inline diagnostics
@@ -24,67 +36,52 @@ vim.diagnostic.config {
 }
 
 -- Keybinding for showing floating diagnostics
-vim.keymap.set("n", "<leader>de", function()
+vim.keymap.set("n", "<leader>e", function()
   vim.diagnostic.open_float(nil, { focus = false })
-end, { desc = "Show diagnostics for current line" })
+end, { noremap = true, desc = "Show diagnostics for current line" })
 
 -- Example LSP servers
 local servers = { "html", "cssls", "lua_ls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- LSPs with default config
-for _, server in ipairs(servers) do
-  lspconfig[server].setup {
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
     on_attach = nvlsp.on_attach,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
-    root_dir = function(fname)
-      return root_pattern(fname) or vim.fn.getcwd() -- Use current working directory as fallback
-    end,
+    ro = get_root_dir,
   }
 end
 
--- Special configuration for Lua language server
-lspconfig.lua_ls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  root_dir = function(fname)
-    -- Try to detect a valid project root
-    local root = root_pattern(fname)
-    if root and root ~= "/home/ian" then
-      return root
-    end
-
-    -- Fallback: If no valid root is found, use Neovim's config directory (or disable workspace)
-    local fallback_root = vim.fn.stdpath "config" -- ~/.config/nvim
-    return fallback_root ~= "/home/ian" and fallback_root or nil
-  end,
-  settings = {
-    Lua = {
-      runtime = { version = "LuaJIT" },
-      diagnostics = {
-        globals = { "vim" }, -- Prevent `vim` being marked as undefined
-      },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.fn.stdpath "config",
-          vim.fn.stdpath "data",
-          unpack(vim.api.nvim_get_runtime_file("", true)),
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = nvlsp.on_attach,
+    on_init = nvlsp.on_init,
+    capabilities = nvlsp.capabilities,
+    root_dir = get_root_dir,
+    settings = {
+      Lua = {
+        runtime = {
+          version = "LuaJIT", -- Neovim uses LuaJIT
+        },
+        diagnostics = {
+          globals = { "vim" }, -- Recognize `vim` as a global
+        },
+        workspace = {
+          library = {
+            vim.fn.expand "$VIMRUNTIME/lua", -- Neovim's runtime files
+            vim.fn.stdpath "config" .. "/lua", -- Your Neovim config files
+          },
+          checkThirdParty = false, -- Avoids warning about third-party libraries
+        },
+        telemetry = {
+          enable = false, -- Disable telemetry
         },
       },
-      telemetry = { enable = false },
     },
-  },
-}
-
--- Configuring single server, example: TypeScript
--- lspconfig.tsserver.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
+  }
+end
 
 -- Configuring single server, example: TypeScript
 -- lspconfig.tsserver.setup {

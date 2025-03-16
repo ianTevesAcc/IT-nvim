@@ -1,8 +1,5 @@
 require "nvchad.options"
 
--- set conceal level to 1 for OB markdown render to work
-vim.opt_local.conceallevel = 2
-
 -- Enable cursorline!
 local o = vim.o
 o.cursorlineopt = "both"

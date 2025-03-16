@@ -12,25 +12,33 @@
 - [x] Set up git remote repo
 - [x] Update README
 - [x] Set up Conform
-- [ ] Set up Linters
-- [ ] Set up Dap
+- [x] Set up Linters
+- [x] Set up Dap
+- [ ] Set up Dap-UI
 - [ ] Set up Debuggers
   - [ ] set up cpp
 - [ ] Set <TAB> as select for CMP instead of <CR>
 - [ ] Set up MD rendering
-- [ ] Set up floating diagnostics instead of inline
-- [ ] Fix LSP
-  - [ ] add vim as global
-  - [ ] fix LSP root
-  - [ ] fix linters (add linter for lua, cpp, etc.)
+  - [ ] Latex rendering
+  - [ ] Live MD Render Plugin
+- [x] Set up floating diagnostics instead of inline
+- [x] Fix LSP
+  - [x] add vim as global
+  - [x] fix LSP root
+  - [x] fix linters (add linter for lua, cpp, etc.)
+- [ ] Add mappings:
+  - [ ] route delete and paste over to void register
+  - [ ] shift tab or tab in insert and normal mode to indent or unindent current line
 - [ ] Add plugins:
   - [ ] leap nvim
-  - [ ]
+  - [ ] mini surround nvim
+  - [ ] ai copilot
+  - [ ] yazi nvim
 
 ## Broken
-- [ ] Lint is currently broken (Works once then never works again at nvim startup)
-- [ ] floating diagnostics on `Options.lua` currently broken (probably missed something small)
-- [ ] LSP config broken - Getting LSP errors for wrong root and vim not being seen as a global config.
+- [x] ~~Lint is currently broken (Works once then never works again at nvim startup)~~
+- [x] ~~floating diagnostics on `Options.lua` currently broken (probably missed something small)~~
+- [x] ~~LSP config broken - Getting LSP errors for wrong root and vim not being seen as a global config.~~
 
 ---
 
