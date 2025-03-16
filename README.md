@@ -14,9 +14,9 @@
 - [x] Set up Conform
 - [x] Set up Linters
 - [x] Set up Dap
-- [ ] Set up Dap-UI
-- [ ] Set up Debuggers
-  - [ ] set up cpp
+- [x] Set up Dap-UI
+- [x] Set up Debuggers
+  - [x] set up cpp, rust, go, c, zig, python
 - [ ] Set <TAB> as select for CMP instead of <CR>
 - [ ] Set up MD rendering
   - [ ] Latex rendering
@@ -29,6 +29,7 @@
 - [ ] Add mappings:
   - [ ] route delete and paste over to void register
   - [ ] shift tab or tab in insert and normal mode to indent or unindent current line
+  - [ ] in .md file cross out selected {'n', "~"}
 - [ ] Add plugins:
   - [ ] leap nvim
   - [ ] mini surround nvim
