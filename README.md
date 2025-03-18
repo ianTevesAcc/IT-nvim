@@ -21,6 +21,7 @@
 - [ ] Set up MD rendering
   - [ ] Latex rendering
   - [ ] Live MD Render Plugin
+  - [ ] Configure MD rendering
 - [x] Set up floating diagnostics instead of inline
 - [x] Fix LSP
   - [x] add vim as global
@@ -35,6 +36,8 @@
   - [ ] mini surround nvim
   - [ ] ai copilot
   - [ ] yazi nvim
+- [ ] Add Markdown Live rendering
+- [ ] Add Latex Live Rendering
 
 ## Broken
 - [x] ~~Lint is currently broken (Works once then never works again at nvim startup)~~
