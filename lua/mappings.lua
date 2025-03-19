@@ -78,9 +78,5 @@ function RenameFunction()
 end
 
 -- Keymap to trigger function rename in visual mode
-map("v", "<leader>r", ":lua RenameFunction()<CR>", { noremap = true, silent = true })
-
-map("n", "<leader>dd", "<CMD> Nvdash <CR>", { desc = "Load Dashboard" })
-
--- map horizontal term to alt-h
-map("n", "<A-h>", ":belowright new | resize 10 | terminal<CR>", { noremap = true, silent = true })
+map("n", "<A-h>", "<leader>tj", { noremap = true, silent = true })
+map("n", "<A-v>", "<leader>tl", { noremap = true, silent = true })

@@ -4,6 +4,10 @@ require "nvchad.options"
 local o = vim.o
 o.cursorlineopt = "both"
 
+-- Prevent NewLine Comment
+vim.cmd "autocmd BufEnter * set formatoptions-=cro"
+vim.cmd "autocmd BufEnter * setlocal formatoptions-=cro"
+
 -- Set relative numbers and current line number on
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -30,8 +34,11 @@ local function conceal_secrets()
   vim.api.nvim_buf_clear_namespace(0, conceal_ns, 0, -1) -- Clear previous marks
 
   if hidden then
-    local secret_patterns =
-      { "secret%s*=%s*['\"](.-)['\"]", "password%s*=%s*['\"](.-)['\"]", "API_KEY%s*=%s*['\"](.-)['\"]" }
+    local secret_patterns = {
+      "secret%s*=%s*['\"](.-)['\"]",
+      "password%s*=%s*['\"](.-)['\"]",
+      "API_KEY%s*=%s*['\"](.-)['\"]",
+    }
 
     for _, pattern in ipairs(secret_patterns) do
       for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, -1, false)) do
@@ -61,14 +68,16 @@ vim.keymap.set("n", "<leader>rr", toggle_conceal, { desc = "Toggle Secret Concea
 -- Auto conceal secrets on buffer read
 vim.api.nvim_create_autocmd("BufReadPost", { callback = conceal_secrets })
 
--- -- Disable inline diagnostics and enable floating windows
--- vim.diagnostic.config {
---   virtual_text = false, -- Disable inline text (warnings, errors, etc.)
---   float = {
---     severity_sort = true, -- Sort by severity: errors first, then warnings
---     border = "rounded", -- Style of the floating window border
---     source = true, -- Always show the source (e.g., LSP server name)
---     header = "", -- Optional header text (can be set to an empty string)
---     prefix = "●", -- Prefix for the diagnostic message (e.g., '●', '>>', etc.)
---   },
--- }
+-- =================
+-- FILE TYPE STYLING
+-- =================
+
+-- MARKDOWN
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+    vim.opt_local.expandtab = true
+  end,
+})
