@@ -1,7 +1,4 @@
 require "nvchad.mappings"
-
--- add yours here
-
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
@@ -77,6 +74,16 @@ function RenameFunction()
   print("Renamed all occurrences of '" .. old_name .. "' to '" .. new_name .. "'")
 end
 
--- Keymap to trigger function rename in visual mode
-map("n", "<A-h>", "<leader>tj", { noremap = true, silent = true })
-map("n", "<A-v>", "<leader>tl", { noremap = true, silent = true })
+-- Remap toggle term
+map({ "n", "t" }, "<leader>tl", function()
+  require("nvchad.term").toggle { pos = "vsp", id = "floo", size = 0.3 }
+end, { noremap = true, desc = "Remap toggle side term" })
+map({ "n", "t" }, "<leader>tj", function()
+  require("nvchad.term").toggle { pos = "sp", id = "xz" }
+end, { noremap = true, desc = "Remap toggle bottom term" })
+map(
+  "t",
+  "<leader><Esc>",
+  "<C-\\><C-n>",
+  { noremap = true, silent = true, desc = "Exit terminal mode" }
+)
