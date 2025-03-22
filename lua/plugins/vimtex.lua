@@ -1,20 +1,18 @@
 return {
   "lervag/vimtex",
-  ft = "tex", -- Load VimTeX only for .tex files
-  init = function()
-    -- Compile using latexmk
-    vim.g.vimtex_compiler_method = "latexmk"
-
-    -- Disable auto quickfix window
-    vim.g.vimtex_quickfix_mode = 0
-
-    -- Use Windows default browser via wslview
+  ft = "tex",
+  config = function()
     vim.g.vimtex_view_method = "general"
-    vim.g.vimtex_view_general_viewer = "/mnt/c/Program Files/SumatraPDF/SumatraPDF.exe"
-    vim.g.vimtex_view_general_options = "-reuse-instance"
+    vim.g.vimtex_view_general_viewer = "sumatraPDF"
 
-    -- Alternative: Open PDF in a specific browser
-    -- vim.g.vimtex_view_general_viewer = "/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
-    -- vim.g.vimtex_view_general_options = ""
+    -- Ensure the Windows path is correctly extracted
+    local tex_path = vim.fn.systemlist("wslpath -w " .. vim.fn.expand "%:p")[1]
+
+    -- Fix path slashes for Windows compatibility
+    tex_path = tex_path:gsub("\\", "/") -- Convert backslashes to forward slashes
+
+    vim.g.vimtex_view_general_options = "-reuse-instance -forward-search "
+      .. tex_path
+      .. " @line @pdf"
   end,
 }

@@ -87,3 +87,6 @@ map(
   "<C-\\><C-n>",
   { noremap = true, silent = true, desc = "Exit terminal mode" }
 )
+
+-- map ; as select next
+vim.keymap.set("n", ";", ";", { noremap = true, silent = true })

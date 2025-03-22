@@ -41,6 +41,13 @@
   - [ ] Add Latex Keymaps
 - [x] disable new line comment
 - [x] Added LSP highlights
+- [ ] Create a Latex Suite plugin
+  - [ ] Latex Suite fast mappings
+  - [ ] Latex Suite formula mappings
+  - [ ] Latex Suite Mathjax - Math block and Math inline mappings
+  - [ ] Latex TikzJax Mappings
+  - [ ] Make it complement with Obsidian TikzJax Renderer (Maybe fork this to work with rendering to browser or inline render through Term emulator for inline rendering)
+
 
 ## Broken
 - [x] ~~floating diagnostics broken again (may be because of changes in lspconfig.lua)~~
