@@ -19,7 +19,7 @@
   - [x] set up cpp, rust, go, c, zig, python
 - [x] Set <TAB> as select for CMP instead of <CR>
 - [ ] Set up MD rendering
-  - [ ] Latex rendering
+  - [x] Latex rendering
   - [ ] Live MD Render Plugin
   - [ ] Configure MD rendering
 - [x] Set up floating diagnostics instead of inline
@@ -37,8 +37,9 @@
     - [ ] yazi nvim
   - [ ] Add Markdown Live rendering
   - [ ] Add Markdown Keymaps
-  - [ ] Add Latex Live Rendering
-  - [ ] Add Latex Keymaps
+  - [x] Add Latex Live Rendering
+  - [x] Add Latex Keymaps
+  - [ ] Add a way to go to current line when clicking in sumatraPDF or nvim .tex file
 - [x] disable new line comment
 - [x] Added LSP highlights
 - [ ] Create a Latex Suite plugin
